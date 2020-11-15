@@ -1,0 +1,47 @@
+<!--
+  ~ Copyright 2020- Network Revolution Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:width="108dp"
+        android:height="75dp"
+        android:viewportWidth="180"
+        android:viewportHeight="125">
+    <path
+            android:pathData="M88.303,72.297H98.522V74.881H88.303V86H85.512V74.881H75.5V72.297H85.512V61.547h2.791z"
+            android:strokeWidth="1.47637796"
+            android:fillColor="@android:color/darker_gray"
+            android:strokeColor="@android:color/transparent"
+            android:fillAlpha="1"/>
+    <path
+            android:pathData="m74,105h95"
+            android:strokeAlpha="1"
+            android:strokeLineJoin="miter"
+            android:strokeWidth="4"
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="?attr/colorPrimary"
+            android:fillAlpha="1"
+            android:strokeLineCap="butt"/>
+    <path
+            android:pathData="m54.673,74.7q0,16.643 -6.106,25.289 -6.106,8.592 -17.994,8.592 -11.672,0 -17.886,-8.43Q6.473,91.667 6.311,75.51V61.407q0,-16.589 6.16,-25.127 6.16,-8.538 17.994,-8.538 11.672,0 17.832,8.268 6.16,8.214 6.376,24.262zM48.189,60.596q0,-13.509 -4.431,-20.426 -4.377,-6.917 -13.293,-6.917 -8.754,0 -13.185,6.755 -4.431,6.755 -4.539,19.939v15.454q0,13.455 4.539,20.588 4.593,7.133 13.293,7.133 8.646,0 13.077,-6.971 4.485,-6.971 4.539,-20.426z"
+            android:strokeWidth="1"
+            android:strokeAlpha="1"
+            android:fillColor="?attr/colorPrimary"
+            android:strokeColor="?attr/colorPrimary"
+            android:fillAlpha="1"
+            tools:ignore="VectorPath"/>
+</vector>

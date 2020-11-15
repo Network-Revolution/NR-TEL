@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2020- Network Revolution Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<layout xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="viewModel" type="com.dokoden.nr_tel.model.MainViewModel"/>
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:inputType="textEmailAddress"
+                        android:textSize="50sp"
+                        android:ems="10"
+                        android:maxLines="1"
+                        android:id="@+id/editText"
+                        android:text="@={viewModel.callNumber}"
+                        android:selection="@{viewModel.callNumber.length()}"
+                        android:layout_weight="1"
+                        android:textColor="?attr/colorPrimaryVariant"
+                        android:autofillHints=""
+                        tools:ignore="LabelFor"/>
+            </LinearLayout>
+            <TableLayout android:layout_width="match_parent" android:layout_height="match_parent">
+                <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                    <ImageButton
+                            android:contentDescription="@string/button_num1"
+                            android:id="@+id/button1"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_1"/>
+                    <ImageButton
+                            android:contentDescription="@string/button_num2"
+                            android:id="@+id/button2"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_2"/>
+                    <ImageButton
+                            android:contentDescription="@string/button_num3"
+                            android:id="@+id/button3"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_3"/>
+                </TableRow>
+                <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                    <ImageButton
+                            android:contentDescription="@string/button_num4"
+                            android:id="@+id/button4"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_4"/>
+                    <ImageButton
+                            android:contentDescription="@string/button_num5"
+                            android:id="@+id/button5"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_5"/>
+                    <ImageButton
+                            android:contentDescription="@string/button_num6"
+                            android:id="@+id/button6"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_6"/>
+                </TableRow>
+                <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                    <ImageButton
+                            android:contentDescription="@string/button_num7"
+                            android:id="@+id/button7"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_7"/>
+                    <ImageButton
+                            android:contentDescription="@string/button_num8"
+                            android:id="@+id/button8"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_8"/>
+                    <ImageButton
+                            android:contentDescription="@string/button_num9"
+                            android:id="@+id/button9"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_9"/>
+                </TableRow>
+                <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                    <ImageButton
+                            android:contentDescription="@string/button_star"
+                            android:id="@+id/button_star"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_star"/>
+                    <ImageButton
+                            android:contentDescription="@string/button_num9"
+                            android:id="@+id/button0"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            android:onLongClick="@{(view) -> viewModel.onLongClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_0"/>
+                    <ImageButton
+                            android:contentDescription="@string/button_pound"
+                            android:id="@+id/button_pound"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(view) -> viewModel.onClickButton(view)}"
+                            app:srcCompat="@drawable/ic_dial_num_pound"/>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

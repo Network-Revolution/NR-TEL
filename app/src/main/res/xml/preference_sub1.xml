@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2020- Network Revolution Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/prefs_log_config_title">
+
+        <EditTextPreference
+                android:title="@string/log_level_title"
+                android:summary="@string/log_level_summary"
+                android:key="@string/log_level_key"
+                android:defaultValue="@string/log_level_default"
+                android:inputType="number"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                app:useSimpleSummaryProvider="false"/>
+        <EditTextPreference
+                android:title="@string/console_level_title"
+                android:summary="@string/console_level_summary"
+                android:key="@string/console_level_key"
+                android:defaultValue="@string/console_level_default"
+                android:inputType="number"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                app:useSimpleSummaryProvider="false"/>
+
+        <EditTextPreference
+                android:title="@string/log_use_direct_file_title"
+                android:summary="@string/log_use_direct_file_summary"
+                android:key="@string/log_use_direct_file_key"
+                android:defaultValue="@string/log_use_direct_file_default"
+                android:inputType="textUri"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                app:useSimpleSummaryProvider="true"/>
+        <ListPreference
+                android:title="@string/log_file_flags_title"
+                android:summary="@string/log_file_flags_summary"
+                android:key="@string/log_file_flags_key"
+                android:defaultValue="@string/log_file_flags_default"
+                android:entries="@array/log_file_flags_list_name"
+                android:entryValues="@array/log_file_flags_list_value"
+                app:useSimpleSummaryProvider="true"/>
+    </PreferenceCategory>
+</PreferenceScreen>

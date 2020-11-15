@@ -1,0 +1,32 @@
+<!--
+  ~ Copyright 2020- Network Revolution Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="108dp"
+        android:height="108dp"
+        android:viewportWidth="108"
+        android:viewportHeight="108">
+    <path
+            android:pathData="m45.056,74.444c0,-3.194 0.511,-6.261 1.457,-9.123 0.281,-0.894 0.077,-1.891 -0.613,-2.581l-5.622,-5.622c3.68,-7.232 9.583,-13.161 16.841,-16.841l5.648,5.622c0.664,0.69 1.661,0.894 2.556,0.613C68.183,45.567 71.25,45.056 74.444,45.056c1.406,0 2.556,-1.15 2.556,-2.556L77,33.556C77,32.15 75.85,31 74.444,31 50.448,31 31,50.448 31,74.444c0,1.406 1.15,2.556 2.556,2.556l8.944,0c1.406,0 2.556,-1.15 2.556,-2.556z"
+            android:fillColor="#ffffff"
+            android:fillAlpha="1"/>
+    <path
+            android:pathData="m66.778,64.222l-2.556,0l0,12.778l2.556,0zM61.667,69.333l-5.111,0l0,-2.556l5.111,0l0,-2.556l-7.667,0l0,7.667l5.111,0l0,2.556l-5.111,0l0,2.556l7.667,0zM69.333,64.222l0,12.778l2.556,0l0,-5.111l5.111,0l0,-7.667zM74.444,69.333l-2.556,0l0,-2.556l2.556,0z"
+            android:strokeWidth="0.99999994"
+            android:fillColor="#ffffff"
+            android:fillAlpha="1"/>
+</vector>

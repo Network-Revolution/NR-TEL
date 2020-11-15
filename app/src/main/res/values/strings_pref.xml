@@ -1,0 +1,133 @@
+<!--
+  ~ Copyright 2020- Network Revolution Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<resources>
+    <string name="prefs_app_config_title">Application Config</string>
+    <string name="prefs_app_config_summary">Application Config</string>
+
+    <string name="prefs_log_config_title">Log Config</string>
+    <string name="prefs_log_config_summary">Log Config</string>
+    <string name="log_level_title">Log level</string>
+    <string name="log_level_summary">Log level for debug between 0 (none) and 5 (verbose)</string>
+    <string name="log_level_key">log_level</string>
+    <string name="log_level_default">1</string>
+    <string name="console_level_title">Log level</string>
+    <string name="console_level_summary">Log level for debug between 0 (none) and 4 (verbose)</string>
+    <string name="console_level_key">console_level</string>
+    <string name="console_level_default">1</string>
+    <string name="log_use_direct_file_title">Log directly to a file</string>
+    <string name="log_use_direct_file_summary">Log into file directly instead of logcat</string>
+    <string name="log_use_direct_file_key">log_use_direct_file</string>
+    <string name="log_use_direct_file_default">log.txt</string>
+    <string name="log_file_flags_title">Additional flags</string>
+    <string name="log_file_flags_summary">Additional flags to be given to pj_file_open() when opening the log file.
+    </string>
+    <string name="log_file_flags_key">log_file_flags</string>
+    <string name="log_file_flags_default">PJ_O_APPEND</string>
+
+    <string-array name="log_file_flags_list_name">
+        <item>PJ_O_RDONLY</item>
+        <item>PJ_O_WRONLY</item>
+        <item>PJ_O_RDWR</item>
+        <item>PJ_O_APPEND</item>
+    </string-array>
+    <string-array name="log_file_flags_list_value">
+        <item>PJ_O_RDONLY</item>
+        <item>PJ_O_WRONLY</item>
+        <item>PJ_O_RDWR</item>
+        <item>PJ_O_APPEND</item>
+    </string-array>
+
+    <string name="prefs_ua_config_title">User Agent Config</string>
+    <string name="prefs_ua_config_summary">User Agent Config</string>
+    <string name="user_agent_title">User agent</string>
+    <string name="user_agent_summary">Agent presented by the application</string>
+    <string name="user_agent_key">user_agent</string>
+    <string name="user_agent_default">NR-Sip-Basic</string>
+    <string name="ua_thread_count_title">Thread count</string>
+    <string name="ua_thread_count_summary">Number of thread allocated to SIP stack. 0 saves battery.</string>
+    <string name="ua_thread_count_key">ua_thread_count</string>
+    <string name="ua_thread_count_default">0</string>
+
+    <string name="prefs_media_config_title">Media Config</string>
+    <string name="prefs_media_config_summary">Media Config</string>
+    <string name="media_thread_count_title">Media thread count</string>
+    <string name="media_thread_count_summary">Number of thread allocated for media processing</string>
+    <string name="media_thread_count_key">media_thread_count</string>
+    <string name="media_thread_count_default">2</string>
+    <string name="media_quality_title">Media quality</string>
+    <string name="media_quality_summary">Quality of the media stream (modify only if you know what you are doing)
+    </string>
+    <string name="media_quality_key">media_quality</string>
+    <string name="media_quality_default">4</string>
+
+    <string name="echo_cancellation_title">Echo cancellation</string>
+    <string name="echo_cancellation_summary">Activate echo cancellation</string>
+    <string name="echo_mode_title">Echo mode</string>
+    <string name="echo_mode_summary">Algorithm for echo</string>
+    <string name="echo_mode_key">media_quality</string>
+    <string name="echo_mode_default">3</string>
+    <string name="echo_cancellation_tail_title">Echo cancellation tail</string>
+    <string name="echo_cancellation_tail_summary">Tail length of echo cancellation</string>
+    <string name="echo_cancellation_tail_key">echo_cancellation_tail</string>
+    <string name="echo_cancellation_tail_default">200</string>
+
+    <string name="prefs_account_config_title">Account Config</string>
+    <string name="prefs_account_config_summary">Account Config</string>
+    <string name="callConfig_timerMinSESec_title">timerMinSESec</string>
+    <string name="callConfig_timerMinSESec_summary">Specify minimum Session Timer expiration period, in seconds.
+    </string>
+    <string name="callConfig_timerMinSESec_key">callConfig_timerMinSESec</string>
+    <string name="callConfig_timerMinSESec_default">90</string>
+    <string name="callConfig_timerSessExpiresSec_title">timerSessExpiresSec</string>
+    <string name="callConfig_timerSessExpiresSec_summary">Specify Session Timer expiration period, in seconds.</string>
+    <string name="callConfig_timerSessExpiresSec_key">callConfig_timerSessExpiresSec</string>
+    <string name="callConfig_timerSessExpiresSec_default">1800</string>
+
+    <string name="natConfig_iceEnabled_title">iceEnabled</string>
+    <string name="natConfig_iceEnabled_summary">Enable ICE for the media transport.</string>
+    <string name="natConfig_iceEnabled_key">natConfig_iceEnabled</string>
+    <string name="natConfig_iceEnabled_default">false</string>
+    <string name="videoConfig_autoShowIncoming_title">autoShowIncoming</string>
+    <string name="videoConfig_autoShowIncoming_summary">Specify whether incoming video should be shown to screen by
+        default.
+    </string>
+    <string name="videoConfig_autoShowIncoming_key">videoConfig_autoShowIncoming</string>
+    <string name="videoConfig_autoShowIncoming_default">false</string>
+    <string name="videoConfig_autoTransmitOutgoing_title">timerSessExpiresSec</string>
+    <string name="videoConfig_autoTransmitOutgoing_summary">Specify whether outgoing video should be activated by
+        default when making outgoing calls and/or when incoming video is detected.
+    </string>
+    <string name="videoConfig_autoTransmitOutgoing_key">videoConfig_autoTransmitOutgoing</string>
+    <string name="videoConfig_autoTransmitOutgoing_default">false</string>
+
+    <string name="prefs_about_title">About</string>
+    <string name="prefs_about_summary">About this application</string>
+    <string name="prefs_about_message">
+        Copyright 2017- Network Revolution Ltd.\n
+        \n
+        Based on Apache2.0 Application PjDroid\n
+        https://github.com/mahmudur85/PjDroid\n
+        \n
+        Based on 2-Clause BSD Application Mdnsjava Core\n
+        https://github.com/devgianlu\n
+        \n
+        Based on Apache2.0 Application RuntimePermissionChecker\n
+        https://github.com/TakuKobayashi/RuntimePermissionChecker\n
+    </string>
+
+</resources>

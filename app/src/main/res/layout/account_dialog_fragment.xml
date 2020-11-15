@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2020- Network Revolution Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="viewModel" type="com.dokoden.nr_tel.model.AccountViewModel"/>
+    </data>
+
+    <TableLayout
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TableRow>
+            <TextView
+                    android:text="Title"
+                    android:textColor="?attr/colorPrimaryVariant"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@={viewModel.editAccount.titleText}"
+                    android:inputType="text"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                    android:text="Server Uri"
+                    android:textColor="?attr/colorPrimaryVariant"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@={viewModel.editAccount.serverUri}"
+                    android:inputType="textUri"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                    android:text="Server mDNS"
+                    android:textColor="?attr/colorPrimaryVariant"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@={viewModel.editAccount.serverMdns}"
+                    android:inputType="textUri"/>
+            <Button
+                    android:text="▶IP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:padding="8dp"
+                    android:id="@+id/button"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                    android:text="Server Port"
+                    android:textColor="?attr/colorPrimaryVariant"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@={`` + viewModel.editAccount.serverPort}"
+                    android:inputType="number"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                    android:text="Username"
+                    android:textColor="?attr/colorPrimaryVariant"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@={viewModel.editAccount.userName}"
+                    android:inputType="textUri"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                    android:text="Password"
+                    android:textColor="?attr/colorPrimaryVariant"/>
+            <EditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@={viewModel.editAccount.userPass}"
+                    android:inputType="textPassword"/>
+        </TableRow>
+    </TableLayout>
+</layout>

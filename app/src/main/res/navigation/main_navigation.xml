@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2020- Network Revolution Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<navigation
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mobile_navigation"
+        app:startDestination="@id/mainFragment">
+
+    <fragment
+            android:id="@+id/mainFragment"
+            android:name="com.dokoden.nr_tel.ui.MainFragment"
+            android:label="main_fragment"
+            tools:layout="@layout/main_fragment">
+
+        <action
+                android:id="@+id/action_mainFragment_to_callFragment"
+                app:destination="@id/callFragment"/>
+
+        <action
+                android:id="@+id/action_mainFragment_to_accountSettingDialogFragment"
+                app:destination="@id/accountSettingDialogFragment"/>
+
+        <action
+                android:id="@+id/action_mainFragment_to_callIncommingFragment"
+                app:destination="@id/callIncommingFragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/callIncommingFragment"
+            android:name="com.dokoden.nr_tel.ui.CallIncomingFragment"
+            android:label="CallIncommingFragment">
+
+        <action
+                android:id="@+id/action_callIncommingFragment_to_callFragment"
+                app:destination="@id/callFragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/callFragment"
+            android:name="com.dokoden.nr_tel.ui.CallFragment"
+            android:label="CallFragment">
+
+        <action
+                android:id="@+id/action_callFragment_to_callDialogFragment"
+                app:destination="@id/toneDialogFragment"/>
+        <action
+                android:id="@+id/action_callFragment_to_xferDialogFragment"
+                app:destination="@id/xferDialogFragment"/>
+        <action
+                android:id="@+id/action_callFragment_to_addCallDialogFragment"
+                app:destination="@id/addCallDialogFragment"/>
+    </fragment>
+
+    <dialog
+            android:id="@+id/toneDialogFragment"
+            android:name="com.dokoden.nr_tel.ui.ToneDialogFragment"
+            android:label="CallDialogFragment"/>
+
+    <dialog
+            android:id="@+id/xferDialogFragment"
+            android:name="com.dokoden.nr_tel.ui.XferDialogFragment"
+            android:label="XferDialogFragment"/>
+
+    <dialog android:id="@+id/addCallDialogFragment"
+            android:name="com.dokoden.nr_tel.ui.AddCallDialogFragment"
+            android:label="AddCallDialogFragment"/>
+
+    <dialog
+            android:id="@+id/accountSettingDialogFragment"
+            android:name="com.dokoden.nr_tel.ui.AccountSettingDialogFragment"
+            android:label="AccountSettingDialogFragment">
+        <action
+                android:id="@+id/action_accountSettingDialogFragment_to_accountMdnsSettingDialogFragment"
+                app:destination="@id/accountMdnsSettingDialogFragment"/>
+    </dialog>
+
+    <dialog
+            android:id="@+id/accountMdnsSettingDialogFragment"
+            android:name="com.dokoden.nr_tel.ui.AccountMdnsSettingDialogFragment"
+            android:label="AccountMdnsSettingDialogFragment"/>
+
+    <fragment
+            android:id="@+id/settingsPreferenceFragment"
+            android:name="com.dokoden.nr_tel.ui.SettingsPreferenceFragment"
+            android:label="SettingsPreferenceFragment">
+
+        <action
+                android:id="@+id/action_settingsPreferenceFragment_to_sub0PreferenceFragment"
+                app:destination="@id/sub0PreferenceFragment"/>
+        <action
+                android:id="@+id/action_settingsPreferenceFragment_to_sub1PreferenceFragment"
+                app:destination="@id/sub1PreferenceFragment"/>
+        <action
+                android:id="@+id/action_settingsPreferenceFragment_to_sub2PreferenceFragment"
+                app:destination="@id/sub2PreferenceFragment"/>
+        <action
+                android:id="@+id/action_settingsPreferenceFragment_to_sub3PreferenceFragment"
+                app:destination="@id/sub3PreferenceFragment"/>
+        <action
+                android:id="@+id/action_settingsPreferenceFragment_to_sub4PreferenceFragment"
+                app:destination="@id/sub4PreferenceFragment"/>
+        <action
+                android:id="@+id/action_settingsPreferenceFragment_to_sub5PreferenceFragment"
+                app:destination="@id/sub5PreferenceFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/sub0PreferenceFragment"
+            android:name="com.dokoden.nr_tel.ui.Sub0PreferenceFragment"
+            android:label="Sub0PreferenceFragment"/>
+
+    <fragment
+            android:id="@+id/sub1PreferenceFragment"
+            android:name="com.dokoden.nr_tel.ui.Sub1PreferenceFragment"
+            android:label="Sub1PreferenceFragment"/>
+
+    <fragment
+            android:id="@+id/sub2PreferenceFragment"
+            android:name="com.dokoden.nr_tel.ui.Sub2PreferenceFragment"
+            android:label="Sub2PreferenceFragment"/>
+
+    <fragment
+            android:id="@+id/sub3PreferenceFragment"
+            android:name="com.dokoden.nr_tel.ui.Sub3PreferenceFragment"
+            android:label="Sub3PreferenceFragment"/>
+
+    <fragment
+            android:id="@+id/sub4PreferenceFragment"
+            android:name="com.dokoden.nr_tel.ui.Sub4PreferenceFragment"
+            android:label="Sub4PreferenceFragment"/>
+
+    <fragment
+            android:id="@+id/sub5PreferenceFragment"
+            android:name="com.dokoden.nr_tel.ui.Sub5PreferenceFragment"
+            android:label="Sub5PreferenceFragment"/>
+</navigation>

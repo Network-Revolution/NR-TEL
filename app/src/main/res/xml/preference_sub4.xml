@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2020- Network Revolution Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/prefs_account_config_title">
+
+        <EditTextPreference
+                android:title="@string/callConfig_timerMinSESec_title"
+                android:summary="@string/callConfig_timerMinSESec_summary"
+                android:key="@string/callConfig_timerMinSESec_key"
+                android:defaultValue="@string/callConfig_timerMinSESec_default"
+                android:inputType="number"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                app:useSimpleSummaryProvider="true"/>
+        <EditTextPreference
+                android:title="@string/callConfig_timerSessExpiresSec_title"
+                android:summary="@string/callConfig_timerSessExpiresSec_summary"
+                android:key="@string/callConfig_timerSessExpiresSec_key"
+                android:defaultValue="@string/callConfig_timerSessExpiresSec_default"
+                android:inputType="number"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                app:useSimpleSummaryProvider="true"/>
+        <SwitchPreferenceCompat
+                android:title="@string/natConfig_iceEnabled_title"
+                android:summary="@string/natConfig_iceEnabled_summary"
+                android:key="@string/natConfig_iceEnabled_key"
+                android:defaultValue="@string/natConfig_iceEnabled_default"/>
+        <SwitchPreferenceCompat
+                android:title="@string/videoConfig_autoShowIncoming_title"
+                android:summary="@string/videoConfig_autoShowIncoming_summary"
+                android:key="@string/videoConfig_autoShowIncoming_key"
+                android:defaultValue="@string/videoConfig_autoShowIncoming_default"/>
+        <SwitchPreferenceCompat
+                android:title="@string/videoConfig_autoTransmitOutgoing_title"
+                android:summary="@string/videoConfig_autoTransmitOutgoing_summary"
+                android:key="@string/videoConfig_autoTransmitOutgoing_key"
+                android:defaultValue="@string/videoConfig_autoTransmitOutgoing_default"/>
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,56 @@
+<!--
+  ~ Copyright 2020- Network Revolution Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:width="108dp"
+        android:height="75dp"
+        android:viewportWidth="180"
+        android:viewportHeight="125">
+    <path
+            android:pathData="m86.133,78.941h-7.746l-1.758,4.781h-1.512l6.457,-17.063h1.371l6.457,17.063h-1.5zM78.832,77.711h6.844l-3.422,-9.293z"
+            android:fillColor="@android:color/darker_gray"
+            android:strokeColor="@android:color/transparent"
+            android:fillAlpha="1"/>
+    <path
+            android:pathData="m91.922,83.723v-17.063h5.039q2.742,0 4.16,1.137 1.418,1.125 1.418,3.328 0,1.324 -0.727,2.309 -0.715,0.973 -1.969,1.395 1.488,0.328 2.391,1.465 0.914,1.137 0.914,2.625 0,2.262 -1.465,3.539 -1.453,1.266 -4.055,1.266zM93.363,75.52v6.984h4.324q1.852,0 2.93,-0.938 1.09,-0.949 1.09,-2.625 0,-1.582 -1.043,-2.496 -1.031,-0.926 -2.859,-0.926zM93.363,74.313h3.938q1.805,-0.035 2.789,-0.844 0.996,-0.82 0.996,-2.379 0,-1.641 -1.031,-2.414 -1.02,-0.785 -3.094,-0.785h-3.598z"
+            android:fillColor="@android:color/darker_gray"
+            android:strokeColor="@android:color/transparent"
+            android:fillAlpha="1"/>
+    <path
+            android:pathData="m118.722,78.402q-0.293,2.695 -1.934,4.125 -1.629,1.43 -4.348,1.43 -1.898,0 -3.363,-0.949 -1.453,-0.949 -2.25,-2.684 -0.797,-1.746 -0.809,-3.984v-2.215q0,-2.273 0.797,-4.031 0.797,-1.758 2.285,-2.707 1.5,-0.961 3.445,-0.961 2.742,0 4.324,1.488 1.594,1.477 1.852,4.09h-1.453q-0.539,-4.348 -4.723,-4.348 -2.32,0 -3.703,1.734 -1.371,1.734 -1.371,4.793v2.086q0,2.953 1.336,4.711 1.348,1.758 3.633,1.758 2.262,0 3.41,-1.078 1.148,-1.09 1.418,-3.258z"
+            android:fillColor="@android:color/darker_gray"
+            android:strokeColor="@android:color/transparent"
+            android:fillAlpha="1"/>
+    <path
+            android:pathData="m74,105h95"
+            android:strokeAlpha="1"
+            android:strokeLineJoin="miter"
+            android:strokeWidth="4"
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="?attr/colorPrimary"
+            android:fillAlpha="1"
+            android:strokeLineCap="butt"/>
+    <path
+            android:pathData="M56.51,107.5H7.229v-4.971L34.193,71.944q6.701,-7.727 9.294,-12.753 2.594,-5.025 2.594,-9.781 0,-7.457 -4.377,-11.78 -4.377,-4.377 -12.05,-4.377 -7.943,0 -12.861,5.079 -4.863,5.079 -4.863,13.185H5.5q0,-6.646 2.972,-12.104 3.026,-5.458 8.538,-8.538 5.566,-3.134 12.645,-3.134 10.807,0 16.859,5.674 6.106,5.674 6.106,15.454 0,5.512 -3.458,12.05 -3.404,6.538 -12.05,16.319L15.173,102.042h41.338z"
+            android:strokeWidth="1"
+            android:strokeAlpha="1"
+            android:fillColor="?attr/colorPrimary"
+            android:strokeColor="?attr/colorPrimary"
+            android:fillAlpha="1"
+            tools:ignore="VectorPath"/>
+</vector>

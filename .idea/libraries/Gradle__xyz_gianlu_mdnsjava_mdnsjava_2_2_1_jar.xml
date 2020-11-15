@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: xyz.gianlu.mdnsjava:mdnsjava:2.2.1@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/xyz.gianlu.mdnsjava/mdnsjava/2.2.1/4b5823d320c8820e19f96278aa562c96cf782f41/mdnsjava-2.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/xyz.gianlu.mdnsjava/mdnsjava/2.2.1/a5b1e25bcd4c3768fe283b794337e1d07c2de9ca/mdnsjava-2.2.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/xyz.gianlu.mdnsjava/mdnsjava/2.2.1/d608fa7fc978cdadbb6454d9354334968eb8c892/mdnsjava-2.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

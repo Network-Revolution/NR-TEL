@@ -1,0 +1,56 @@
+<!--
+  ~ Copyright 2020- Network Revolution Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:width="108dp"
+        android:height="75dp"
+        android:viewportWidth="180"
+        android:viewportHeight="125">
+    <path
+            android:pathData="M88.5,67.891H82.652V83.723H81.211V67.891H75.375v-1.23h13.125z"
+            android:fillColor="@android:color/darker_gray"
+            android:strokeColor="@android:color/transparent"
+            android:fillAlpha="1"/>
+    <path
+            android:pathData="m103.019,66.66v11.648q-0.012,1.723 -0.762,3 -0.75,1.277 -2.121,1.969 -1.359,0.68 -3.129,0.68 -2.695,0 -4.324,-1.465 -1.617,-1.477 -1.676,-4.078V66.66h1.43v11.543q0,2.156 1.23,3.352 1.23,1.184 3.34,1.184 2.109,0 3.328,-1.195 1.23,-1.195 1.23,-3.328V66.66Z"
+            android:fillColor="@android:color/darker_gray"
+            android:strokeColor="@android:color/transparent"
+            android:fillAlpha="1"/>
+    <path
+            android:pathData="m112.207,81.613 l0.094,0.363 0.105,-0.363 5.367,-14.953h1.582l-6.352,17.063h-1.383l-6.352,-17.063h1.57z"
+            android:fillColor="@android:color/darker_gray"
+            android:strokeColor="@android:color/transparent"
+            android:fillAlpha="1"/>
+    <path
+            android:pathData="m74,105h95"
+            android:strokeAlpha="1"
+            android:strokeLineJoin="miter"
+            android:strokeWidth="4"
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="?attr/colorPrimary"
+            android:fillAlpha="1"
+            android:strokeLineCap="butt"/>
+    <path
+            android:pathData="m53.592,49.087q0,6.106 -3.566,10.969 -3.566,4.809 -9.402,7.079 6.809,2.324 10.915,7.511 4.107,5.188 4.107,11.996 0,10.105 -6.863,16.049 -6.863,5.89 -18.156,5.89 -11.402,0 -18.264,-5.89 -6.809,-5.89 -6.809,-16.049 0,-6.701 3.945,-11.942Q13.443,69.458 20.306,67.135 14.47,64.865 11.012,60.056 7.553,55.193 7.553,49.087q0,-9.781 6.268,-15.563 6.322,-5.782 16.697,-5.782 10.375,0 16.697,5.836 6.376,5.836 6.376,15.508zM49.161,86.696q0,-7.349 -5.242,-12.05 -5.242,-4.755 -13.401,-4.755 -8.16,0 -13.347,4.647 -5.188,4.647 -5.188,12.158 0,7.511 5.025,11.996 5.025,4.431 13.617,4.431 8.376,0 13.455,-4.431 5.079,-4.431 5.079,-11.996zM47.108,49.033q0,-6.755 -4.701,-11.24 -4.647,-4.539 -11.888,-4.539 -7.349,0 -11.942,4.377 -4.539,4.323 -4.539,11.402 0,6.917 4.539,11.132 4.593,4.215 11.996,4.215 7.295,0 11.888,-4.215 4.647,-4.269 4.647,-11.132z"
+            android:strokeWidth="1"
+            android:strokeAlpha="1"
+            android:fillColor="?attr/colorPrimary"
+            android:strokeColor="?attr/colorPrimary"
+            android:fillAlpha="1"
+            tools:ignore="VectorPath"/>
+</vector>

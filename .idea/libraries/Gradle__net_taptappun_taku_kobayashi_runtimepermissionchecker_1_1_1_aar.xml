@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: net.taptappun.taku.kobayashi:runtimepermissionchecker:1.1.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fd705e731d176b745c4a663f72f866f9/jetified-runtimepermissionchecker-1.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fd705e731d176b745c4a663f72f866f9/jetified-runtimepermissionchecker-1.1.1/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.taptappun.taku.kobayashi/runtimepermissionchecker/1.1.1/c942b301f8ead1cfcea1308f91564941e687c879/runtimepermissionchecker-1.1.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.taptappun.taku.kobayashi/runtimepermissionchecker/1.1.1/d753cbc2b57e20eb6608f041b88cf050bfc10957/runtimepermissionchecker-1.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
