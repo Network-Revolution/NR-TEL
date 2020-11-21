@@ -60,7 +60,9 @@ class EndlessService : LifecycleService() {
     private lateinit var notifyManager: NotificationManager
     private lateinit var notifyBuilder: NotificationCompat.Builder
     private val defaultChannelID by lazy { "$packageName.channel_default" }
+    private val defaultNotifyID = 1
     private val callChannelID by lazy { "$packageName.channel_call" }
+    private val callNotifyID = 2
     private val notifyTitle by lazy { resources.getString(R.string.notification_title) }
     private val notifyText by lazy { resources.getString(R.string.notification_text) }
 
@@ -113,7 +115,7 @@ class EndlessService : LifecycleService() {
             }
 
             notifyBuilder.setStyle(inboxStyle)
-            notifyManager.notify(Constants.NotifyID.Default.ordinal, notifyBuilder.build())
+            notifyManager.notify(defaultNotifyID, notifyBuilder.build())
         })
 
         sipStack.status.observe(this, {
@@ -189,7 +191,7 @@ class EndlessService : LifecycleService() {
             .setContentIntent(pendingIntent)
             .setSmallIcon(R.drawable.ic_indicator_circle)
             .color = resources.getColor(R.color.colorLightGreen, theme)
-        startForeground(Constants.NotifyID.Default.ordinal, notifyBuilder.build())
+        startForeground(defaultNotifyID, notifyBuilder.build())
 
         partialWakeLock.acquire()
     }
@@ -276,11 +278,11 @@ class EndlessService : LifecycleService() {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_CALL)
 
-        notifyManager.notify(Constants.NotifyID.Call.ordinal, notification.build())
+        notifyManager.notify(callNotifyID, notification.build())
     }
 
     private fun callAnswer() {
-        notifyManager.cancel(Constants.NotifyID.Call.ordinal)
+        notifyManager.cancel(callNotifyID)
         stopRinging()
         sipStack.callAnswer()
         Intent(this, MainActivity::class.java).also {
@@ -291,7 +293,7 @@ class EndlessService : LifecycleService() {
     }
 
     private fun callReject() {
-        notifyManager.cancel(Constants.NotifyID.Call.ordinal)
+        notifyManager.cancel(callNotifyID)
         stopRinging()
         sipStack.callReject()
         Intent(this, MainActivity::class.java).also {

@@ -29,11 +29,6 @@ object Constants {
         Call,
     }
 
-    enum class NotifyID {
-        Default,
-        Call,
-    }
-
     enum class Actions {
         Start,
         ReStart,
