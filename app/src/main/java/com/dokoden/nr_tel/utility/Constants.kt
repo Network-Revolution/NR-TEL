@@ -18,10 +18,8 @@
 package com.dokoden.nr_tel.utility
 
 object Constants {
-    const val LIB_FILENAME = "pjsua2"
-    const val LOG_TAG = "pjsua2"
-    const val LOG_LEVEL = 4
-    const val AUTOKILL_ON_FINISH = true
+    const val DefaultNotifyID = 1
+    const val CallNotifyID = 2
 
     enum class RequestCode {
         Permission,
