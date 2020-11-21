@@ -165,6 +165,22 @@ class EndlessService : LifecycleService() {
     }
 
     private fun startService() {
+        createNotification()
+        partialWakeLock.acquire()
+    }
+
+    private fun stopService() {
+        if (audioManager.isBluetoothScoOn) audioManager.stopBluetoothSco()
+        if (this::notifyManager.isInitialized) notifyManager.cancelAll()
+        if (this::partialWakeLock.isInitialized && partialWakeLock.isHeld) partialWakeLock.release()
+        if (this::proximityWakeLock.isInitialized && proximityWakeLock.isHeld) proximityWakeLock.release()
+        if (this::wifiLock.isInitialized && wifiLock.isHeld) wifiLock.release()
+        stopForeground(true)
+        stopSelf()
+        sipStack.deInitLib()
+    }
+
+    private fun createNotification() {
         notifyManager = getSystemService(Service.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel(defaultChannelID, "Default", NotificationManager.IMPORTANCE_LOW).also {
@@ -183,26 +199,15 @@ class EndlessService : LifecycleService() {
         }
 
         notifyBuilder
-            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-            .setOngoing(true)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setOngoing(true)
 //            .setUsesChronometer(true)
-            .setContentTitle(notifyTitle)
-            .setContentText(notifyText)
-            .setContentIntent(pendingIntent)
-            .setSmallIcon(R.drawable.ic_indicator_circle)
-            .color = resources.getColor(R.color.colorLightGreen, theme)
+                .setContentTitle(notifyTitle)
+                .setContentText(notifyText)
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.ic_indicator_circle)
+                .color = resources.getColor(R.color.colorLightGreen, theme)
         startForeground(defaultNotifyID, notifyBuilder.build())
-
-        partialWakeLock.acquire()
-    }
-
-    private fun stopService() {
-        if (audioManager.isBluetoothScoOn) audioManager.stopBluetoothSco()
-        if (this::notifyManager.isInitialized) notifyManager.cancelAll()
-        if (this::partialWakeLock.isInitialized && partialWakeLock.isHeld) partialWakeLock.release()
-        if (this::proximityWakeLock.isInitialized && proximityWakeLock.isHeld) proximityWakeLock.release()
-        if (this::wifiLock.isInitialized && wifiLock.isHeld) wifiLock.release()
-        sipStack.deInitLib()
     }
 
     private fun incomingCall() {
