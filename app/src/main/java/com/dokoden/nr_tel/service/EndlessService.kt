@@ -165,7 +165,7 @@ class EndlessService : LifecycleService() {
     }
 
     private fun startService() {
-        createNotification()
+        createDefaultNotify()
         partialWakeLock.acquire()
     }
 
@@ -180,7 +180,7 @@ class EndlessService : LifecycleService() {
         sipStack.deInitLib()
     }
 
-    private fun createNotification() {
+    private fun createDefaultNotify() {
         notifyManager = getSystemService(Service.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel(defaultChannelID, "Default", NotificationManager.IMPORTANCE_LOW).also {
@@ -210,24 +210,18 @@ class EndlessService : LifecycleService() {
         startForeground(defaultNotifyID, notifyBuilder.build())
     }
 
-    private fun incomingCall() {
-        val callerId = sipStack.callNumber.value ?: return
-        val callerStatus = sipStack.callStatus.value ?: return
-//        val callerImage = getDrawable(intent?.getIntExtra("caller_image", R.drawable.ic_person_black_200dp)!!) as BitmapDrawable
-
-        startRinging()
-
+    private fun createCallNotify(callerId: String, callerStatus: String) {
         val customView = RemoteViews(packageName, R.layout.call_notification).also {
             it.setTextViewText(R.id.callerName, callerId)
-            it.setTextViewText(R.id.callerNumber, callerStatus)
+            it.setTextViewText(R.id.callerStateus, callerStatus)
 //            it.setImageViewBitmap(R.id.photo, callerImage.bitmap)
         }
 
         val pendingIntent = Intent(this, MainActivity::class.java).let {
             it.action = Constants.Actions.CallIncoming.name
             it.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            it.putExtra("caller_name", callerId)
-            it.putExtra("caller_number", callerStatus)
+//            it.putExtra(R.id.callerName, callerId)
+//            it.putExtra(R.id.callerStateus, callerStatus)
             PendingIntent.getActivity(this, Constants.RequestCode.Call.ordinal, it, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
@@ -252,38 +246,47 @@ class EndlessService : LifecycleService() {
             customView.setOnClickPendingIntent(R.id.btnDecline, rejectPendingIntent)
 
             NotificationCompat.Builder(this, callChannelID)
-                .setFullScreenIntent(pendingIntent, true)
-                .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-                .setCustomContentView(customView)
-                .setCustomBigContentView(customView)
+                    .setFullScreenIntent(pendingIntent, true)
+                    .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+                    .setCustomContentView(customView)
+                    .setCustomBigContentView(customView)
         } else {
             val answerAction = NotificationCompat
-                .Action
-                .Builder(R.drawable.ic_call_black_24dp, "HANG OUT", answerPendingIntent)
-                .build()
+                    .Action
+                    .Builder(R.drawable.ic_call_black_24dp, "HANG OUT", answerPendingIntent)
+                    .build()
             val hangupAction = NotificationCompat
-                .Action
-                .Builder(R.drawable.ic_call_end_black_24dp, "HANG UP", rejectPendingIntent)
-                .build()
+                    .Action
+                    .Builder(R.drawable.ic_call_end_black_24dp, "HANG UP", rejectPendingIntent)
+                    .build()
             NotificationCompat.Builder(this)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_call_black_24dp))
-                .setContentIntent(pendingIntent)
-                .addAction(answerAction)
-                .addAction(hangupAction)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_call_black_24dp))
+                    .setContentIntent(pendingIntent)
+                    .addAction(answerAction)
+                    .addAction(hangupAction)
         }
 
         notification
-            .setContentTitle(getString(R.string.app_name))
-            .setTicker("Call_STATUS")
-            .setContentText("IncomingCall")
-            .setSmallIcon(R.drawable.ic_call_black_24dp)
-            .setDefaults(Notification.DEFAULT_LIGHTS or Notification.DEFAULT_SOUND)
-            .setVibrate(null)
-            .setOngoing(true)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setCategory(NotificationCompat.CATEGORY_CALL)
+                .setContentTitle(getString(R.string.app_name))
+                .setTicker("Call_STATUS")
+                .setContentText("IncomingCall")
+                .setSmallIcon(R.drawable.ic_call_black_24dp)
+                .setDefaults(Notification.DEFAULT_LIGHTS or Notification.DEFAULT_SOUND)
+                .setVibrate(null)
+                .setOngoing(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_CALL)
 
         notifyManager.notify(callNotifyID, notification.build())
+    }
+
+    private fun incomingCall() {
+        val callerId = sipStack.callNumber.value ?: return
+        val callerStatus = sipStack.callStatus.value ?: return
+//        val callerImage = getDrawable(intent?.getIntExtra("caller_image", R.drawable.ic_person_black_200dp)!!) as BitmapDrawable
+
+        startRinging()
+        createCallNotify(callerId, callerStatus)
     }
 
     private fun callAnswer() {

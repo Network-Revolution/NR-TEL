@@ -41,7 +41,7 @@
                     android:padding="5dp"/>
 
             <TextView
-                    android:id="@+id/callerNumber"
+                    android:id="@+id/callerStateus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-10dp"
