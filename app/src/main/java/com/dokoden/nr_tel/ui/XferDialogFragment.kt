@@ -24,7 +24,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.dokoden.nr_tel.R
 import com.dokoden.nr_tel.databinding.XferDialogFragmentBinding
 import com.dokoden.nr_tel.model.MainViewModel
@@ -41,7 +41,9 @@ class XferDialogFragment : DialogFragment() {
             false
         )
 
-        val navController = binding.tabDialogNaviHost.findNavController()
+        val navHostFragment =
+            requireParentFragment().parentFragmentManager.findFragmentById(R.id.tab_dialog_navi_host) as NavHostFragment
+        val navController = navHostFragment.navController
         val graph = navController.navInflater.inflate(R.navigation.tab_navigation)
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
