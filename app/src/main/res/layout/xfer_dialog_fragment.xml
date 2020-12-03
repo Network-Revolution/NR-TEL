@@ -59,13 +59,12 @@
                         android:layout_height="wrap_content"/>
 
             </com.google.android.material.tabs.TabLayout>
-            <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/tab_dialog_navi_host"
-                    android:name="androidx.navigation.fragment.NavHostFragment"
+
+            <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:navGraph="@navigation/tab_navigation"
-                    app:defaultNavHost="true"/>
+                    android:layout_height="match_parent"/>
+
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

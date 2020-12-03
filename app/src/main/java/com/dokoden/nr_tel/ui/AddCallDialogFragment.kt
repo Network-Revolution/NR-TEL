@@ -17,63 +17,53 @@
 
 package com.dokoden.nr_tel.ui
 
-import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.appcompat.app.AlertDialog
-import androidx.databinding.DataBindingUtil
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.dokoden.nr_tel.R
 import com.dokoden.nr_tel.databinding.AddCallDialogFragmentBinding
 import com.dokoden.nr_tel.model.MainViewModel
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class AddCallDialogFragment : DialogFragment() {
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val mainViewModel by viewModels<MainViewModel>()
+        val pagesSize = 4
 
-        val binding = DataBindingUtil.inflate<AddCallDialogFragmentBinding>(
-            LayoutInflater.from(requireActivity()),
-            R.layout.add_call_dialog_fragment,
-            null,
-            false
-        )
-
-        val navHostFragment =
-            requireParentFragment().parentFragmentManager.findFragmentById(R.id.tab_dialog_navi_host) as NavHostFragment
-        val navController = navHostFragment.navController
-        val graph = navController.navInflater.inflate(R.navigation.tab_navigation)
-
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                graph.startDestination = when (tab.position) {
-                    0 -> R.id.tab0Fragment
-                    1 -> R.id.tab1Fragment
-                    2 -> R.id.tab2Fragment
-                    3 -> R.id.tab3Fragment
-                    else -> return
+        AddCallDialogFragmentBinding.inflate(inflater, container, false).also {
+            it.lifecycleOwner = viewLifecycleOwner
+            it.viewModel = mainViewModel
+            it.viewpager.adapter = object : FragmentStateAdapter(childFragmentManager, lifecycle) {
+                override fun getItemCount() = pagesSize
+                override fun createFragment(position: Int) = when (position) {
+                    0 -> Tab0Fragment()
+                    1 -> Tab1Fragment()
+                    2 -> Tab2Fragment()
+                    3 -> Tab3Fragment()
+                    else -> Tab0Fragment()
                 }
-                navController.graph = graph
             }
+            TabLayoutMediator(it.tabLayout, it.viewpager) { tab, position ->
+                when (position) {
+                    0 -> tab.setIcon(R.drawable.ic_dialpad_black_24dp)
+                    1 -> tab.setIcon(R.drawable.ic_access_time_black_24dp)
+                    2 -> tab.setIcon(R.drawable.ic_star_black_24dp)
+                    3 -> tab.setIcon(R.drawable.ic_comment_black_24dp)
+                    else -> tab.setIcon(R.drawable.ic_dialpad_black_24dp)
+                }
+            }.attach()
+            return it.root
+        }
+    }
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
-
-        mainViewModel.callNumber.observe(requireParentFragment(), {
-            binding.viewModel = mainViewModel
-        })
-
-        return AlertDialog
-            .Builder(requireActivity())
-            .setTitle(R.string.incall_transfer_title)
-            .setView(binding.root)
-            .setPositiveButton(R.string.done) { _, _ ->
-            }
-            .setNeutralButton(R.string.cancel) { _, _ ->
-            }
-            .create()
+    override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
+        val hoge = "hoge"
     }
 }
