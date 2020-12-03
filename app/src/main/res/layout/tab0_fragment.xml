@@ -66,7 +66,7 @@
                         android:onLongClick="@{() -> viewModel.onLongClickDelete()}"
                         app:srcCompat="@drawable/ic_backspace_black_24dp"/>
             </LinearLayout>
-            <TableLayout android:layout_width="match_parent" android:layout_height="match_parent">
+            <TableLayout android:layout_width="match_parent" android:layout_height="wrap_content">
                 <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
                     <ImageButton
                             android:contentDescription="@string/button_num1"
@@ -173,6 +173,12 @@
                             app:srcCompat="@drawable/ic_dial_num_pound"/>
                 </TableRow>
             </TableLayout>
+            <Button
+                    android:id="@+id/add_call"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="hogehoge"
+                    android:visibility="gone"/>
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
