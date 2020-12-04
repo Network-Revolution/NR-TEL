@@ -22,7 +22,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -32,9 +31,11 @@ import com.dokoden.nr_tel.model.MainViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AddCallDialogFragment : DialogFragment() {
+    val mainViewModel by viewModels<MainViewModel>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val mainViewModel by viewModels<MainViewModel>()
         val pagesSize = 4
+        mainViewModel.isOncall.postValue(true)
 
         AddCallDialogFragmentBinding.inflate(inflater, container, false).also {
             it.lifecycleOwner = viewLifecycleOwner
@@ -64,6 +65,7 @@ class AddCallDialogFragment : DialogFragment() {
 
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
-        val hoge = "hoge"
+        mainViewModel.isOncall.postValue(false)
+        mainViewModel.callNumber.postValue("")
     }
 }

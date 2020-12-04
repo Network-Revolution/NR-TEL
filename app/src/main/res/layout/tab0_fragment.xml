@@ -21,6 +21,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable name="viewModel" type="com.dokoden.nr_tel.model.MainViewModel"/>
     </data>
 
@@ -174,11 +175,14 @@
                 </TableRow>
             </TableLayout>
             <Button
-                    android:id="@+id/add_call"
+                    android:id="@+id/xfer_buton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="hogehoge"
-                    android:visibility="gone"/>
+                    android:onClick="@{(view) -> viewModel.onCallXfer(view)}"
+                    android:visibility="@{viewModel.isOncall ? View.VISIBLE : View.GONE}"
+                    app:icon="@drawable/ic_call_black_24dp"
+                    app:iconSize="48dp"
+                    app:iconGravity="textStart"/>
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

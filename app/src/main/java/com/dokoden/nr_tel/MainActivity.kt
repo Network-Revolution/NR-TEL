@@ -18,7 +18,6 @@
 package com.dokoden.nr_tel
 
 import android.content.Intent
-import android.content.pm.ApplicationInfo
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -81,6 +80,9 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
                 navController.navigate(R.id.mainFragment, null)
             }
             Constants.Actions.CallOutgoing.name -> {
+                navController.navigate(R.id.callFragment, null)
+            }
+            Constants.Actions.CallXfer.name -> {
                 navController.navigate(R.id.callFragment, null)
             }
             else -> {

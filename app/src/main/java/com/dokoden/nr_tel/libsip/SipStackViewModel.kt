@@ -18,16 +18,11 @@
 package com.dokoden.nr_tel.libsip
 
 import android.app.Application
-import android.content.ContentValues
 import android.content.Context
-import android.provider.CallLog
 import android.telephony.TelephonyManager
 import androidx.lifecycle.AndroidViewModel
 import com.dokoden.nr_tel.model.*
-import com.dokoden.nr_tel.utility.Constants
 import com.dokoden.nr_tel.utility.PreferencesUtils
-import java.util.concurrent.TimeUnit
-import java.util.regex.Pattern
 
 
 class SipStackViewModel(application: Application) : AndroidViewModel(application) {

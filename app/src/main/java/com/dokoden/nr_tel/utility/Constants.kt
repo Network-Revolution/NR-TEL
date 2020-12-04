@@ -44,6 +44,7 @@ object Constants {
         CallShow,
         CallAnswer,
         CallReject,
+        CallXfer,
         TransferShow,
         TransferAccept,
         TransferDeny,

@@ -23,6 +23,7 @@ import com.dokoden.nr_tel.libsip.SipAccount
 class TempRepository {
     companion object {
         val status = MutableLiveData("")
+        val isOncall = MutableLiveData(false)
 
         val callNumber = MutableLiveData("")
         val callStatus = MutableLiveData("")

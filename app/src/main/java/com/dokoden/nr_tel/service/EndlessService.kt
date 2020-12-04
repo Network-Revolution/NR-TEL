@@ -147,6 +147,7 @@ class EndlessService : LifecycleService() {
             Constants.Actions.CallAnswer.name -> callAnswer()
             Constants.Actions.CallReject.name -> callReject()
             Constants.Actions.CallOutgoing.name -> callOutgoing()
+            Constants.Actions.CallXfer.name -> callXfer()
         }
         return START_STICKY
     }
@@ -197,14 +198,14 @@ class EndlessService : LifecycleService() {
         }
 
         notifyBuilder
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setOngoing(true)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setOngoing(true)
 //            .setUsesChronometer(true)
-                .setContentTitle(notifyTitle)
-                .setContentText(notifyText)
-                .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.ic_indicator_circle)
-                .color = resources.getColor(R.color.colorLightGreen, theme)
+            .setContentTitle(notifyTitle)
+            .setContentText(notifyText)
+            .setContentIntent(pendingIntent)
+            .setSmallIcon(R.drawable.ic_indicator_circle)
+            .color = resources.getColor(R.color.colorLightGreen, theme)
         startForeground(Constants.DefaultNotifyID, notifyBuilder.build())
     }
 
@@ -244,36 +245,36 @@ class EndlessService : LifecycleService() {
             customView.setOnClickPendingIntent(R.id.btnDecline, rejectPendingIntent)
 
             NotificationCompat.Builder(this, callChannelID)
-                    .setFullScreenIntent(pendingIntent, true)
-                    .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-                    .setCustomContentView(customView)
-                    .setCustomBigContentView(customView)
+                .setFullScreenIntent(pendingIntent, true)
+                .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+                .setCustomContentView(customView)
+                .setCustomBigContentView(customView)
         } else {
             val answerAction = NotificationCompat
-                    .Action
-                    .Builder(R.drawable.ic_call_black_24dp, "HANG OUT", answerPendingIntent)
-                    .build()
+                .Action
+                .Builder(R.drawable.ic_call_black_24dp, "HANG OUT", answerPendingIntent)
+                .build()
             val hangupAction = NotificationCompat
-                    .Action
-                    .Builder(R.drawable.ic_call_end_black_24dp, "HANG UP", rejectPendingIntent)
-                    .build()
+                .Action
+                .Builder(R.drawable.ic_call_end_black_24dp, "HANG UP", rejectPendingIntent)
+                .build()
             NotificationCompat.Builder(this)
-                    .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_call_black_24dp))
-                    .setContentIntent(pendingIntent)
-                    .addAction(answerAction)
-                    .addAction(hangupAction)
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_call_black_24dp))
+                .setContentIntent(pendingIntent)
+                .addAction(answerAction)
+                .addAction(hangupAction)
         }
 
         notification
-                .setContentTitle(getString(R.string.app_name))
-                .setTicker("Call_STATUS")
-                .setContentText("IncomingCall")
-                .setSmallIcon(R.drawable.ic_call_black_24dp)
-                .setDefaults(Notification.DEFAULT_LIGHTS or Notification.DEFAULT_SOUND)
-                .setVibrate(null)
-                .setOngoing(true)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_CALL)
+            .setContentTitle(getString(R.string.app_name))
+            .setTicker("Call_STATUS")
+            .setContentText("IncomingCall")
+            .setSmallIcon(R.drawable.ic_call_black_24dp)
+            .setDefaults(Notification.DEFAULT_LIGHTS or Notification.DEFAULT_SOUND)
+            .setVibrate(null)
+            .setOngoing(true)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(NotificationCompat.CATEGORY_CALL)
 
         notifyManager.notify(Constants.CallNotifyID, notification.build())
     }
@@ -312,6 +313,18 @@ class EndlessService : LifecycleService() {
     private fun callOutgoing() {
         val outgoingNumber = viewModel.callNumber.value ?: return
         sipStack.callOutgoing(outgoingNumber)
+        Intent(this, MainActivity::class.java).also {
+            it.action = Constants.Actions.CallOutgoing.name
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(it)
+        }
+
+        viewModel.callNumber.postValue("")
+    }
+
+    private fun callXfer() {
+        val outgoingNumber = viewModel.callNumber.value ?: return
+        sipStack.callTransfer(outgoingNumber)
         Intent(this, MainActivity::class.java).also {
             it.action = Constants.Actions.CallOutgoing.name
             it.flags = Intent.FLAG_ACTIVITY_NEW_TASK

@@ -37,7 +37,9 @@ class Tab2Fragment : Fragment() {
             override fun onCardClicked(contactBookDataClass: ContactBookDataClass) {
                 mainViewModel.callNumber.postValue(contactBookDataClass.number)
                 Intent(activity, EndlessService::class.java).also {
-                    it.action = Constants.Actions.CallOutgoing.name
+                    it.action = if (mainViewModel.isOncall.value!!)
+                        Constants.Actions.CallXfer.name else Constants.Actions.CallOutgoing.name
+
                     container!!.context.startService(it)
                 }
             }

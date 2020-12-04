@@ -17,6 +17,7 @@
 
 package com.dokoden.nr_tel.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,8 @@ import androidx.fragment.app.viewModels
 import com.dokoden.nr_tel.databinding.Tab1FragmentBinding
 import com.dokoden.nr_tel.model.CallLogDataClass
 import com.dokoden.nr_tel.model.MainViewModel
+import com.dokoden.nr_tel.service.EndlessService
+import com.dokoden.nr_tel.utility.Constants
 
 class Tab1Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,10 +36,12 @@ class Tab1Fragment : Fragment() {
         val recyclerAdapter = Tab1RecyclerAdapter(object : Tab1RecyclerAdapter.OnCardClickListener {
             override fun onCardClicked(callLogDataClass: CallLogDataClass) {
                 mainViewModel.callNumber.postValue(callLogDataClass.number)
-//                Intent(activity, EndlessService::class.java).also {
-//                    it.action = Constants.Actions.CallOutgoing.name
-//                    container!!.context.startService(it)
-//                }
+                Intent(activity, EndlessService::class.java).also {
+                    it.action = if (mainViewModel.isOncall.value!!)
+                        Constants.Actions.CallXfer.name else Constants.Actions.CallOutgoing.name
+
+                    container!!.context.startService(it)
+                }
             }
         })
 

@@ -44,6 +44,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val callNumber = TempRepository.callNumber
     val callLog = TempRepository.callLog
     val contactBook = TempRepository.contactBook
+    val isOncall = TempRepository.isOncall
 
     fun onClickButton(view: View) {
         callNumber.value += when (view.id) {
@@ -185,6 +186,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun onClickVideo(view: View) {
+    }
+
+    fun onCallXfer(view: View) {
+
     }
 
     fun onCallAction(view: View) {
