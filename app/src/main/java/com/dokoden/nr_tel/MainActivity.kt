@@ -17,10 +17,15 @@
 
 package com.dokoden.nr_tel
 
+import android.app.Activity
+import android.app.role.RoleManager
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.telecom.TelecomManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.PermissionChecker
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.preference.Preference
@@ -32,6 +37,10 @@ import net.taptappun.taku.kobayashi.runtimepermissionchecker.RuntimePermissionCh
 
 class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
     private lateinit var binding: MainActivityBinding
+    private val REQUEST_PERMISSION = 100
+    private val REQUEST_ROLE = 200
+    private val REQUEST_TELECOM = 300
+
     private val navController by lazy { findNavController(R.id.main_navi_host) }
     private val endlessService by lazy { Intent(this, EndlessService::class.java) }
 
@@ -39,6 +48,7 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
         super.onCreate(savedInstanceState)
 
         //パーミッションの許可
+        offerReplacingDefaultDialer()
         RuntimePermissionChecker.requestAllPermissions(this, Constants.RequestCode.Permission.ordinal)
 
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
@@ -51,6 +61,43 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
                 } else {
                     startService(it)
                 }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_PERMISSION && PermissionChecker.PERMISSION_GRANTED in grantResults) {
+
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            REQUEST_ROLE -> when (resultCode) {
+                Activity.RESULT_CANCELED -> {
+                    //the user didn't set you as the default screening app...
+                }
+                Activity.RESULT_OK -> {
+                    //The user set you as the default screening app!
+                }
+                Activity.RESULT_FIRST_USER -> {
+
+                }
+            }
+            REQUEST_TELECOM -> when (resultCode) {
+                Activity.RESULT_CANCELED -> {
+                    //the user didn't set you as the default screening app...
+                }
+                Activity.RESULT_OK -> {
+                    //The user set you as the default screening app!
+                }
+                Activity.RESULT_FIRST_USER -> {
+
+                }
+            }
+            else -> {
             }
         }
     }
@@ -70,23 +117,31 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
             "android.intent.action.MAIN" -> {
                 return
             }
-            Constants.Actions.CallIncoming.name -> {
-                navController.navigate(R.id.callIncommingFragment, null)
-            }
-            Constants.Actions.CallAnswer.name -> {
-                navController.navigate(R.id.callFragment, null)
-            }
-            Constants.Actions.CallReject.name -> {
-                navController.navigate(R.id.mainFragment, null)
-            }
-            Constants.Actions.CallOutgoing.name -> {
-                navController.navigate(R.id.callFragment, null)
-            }
-            Constants.Actions.CallXfer.name -> {
-                navController.navigate(R.id.callFragment, null)
-            }
+            Constants.Actions.CallIncoming.name -> navController.navigate(R.id.callIncommingFragment, null)
+            Constants.Actions.CallAnswer.name -> navController.navigate(R.id.callFragment, null)
+            Constants.Actions.CallReject.name -> navController.navigate(R.id.mainFragment, null)
+            Constants.Actions.CallOutgoing.name -> navController.navigate(R.id.callFragment, null)
+            Constants.Actions.CallXfer.name -> navController.navigate(R.id.callFragment, null)
             else -> {
 
+            }
+        }
+    }
+
+    private fun offerReplacingDefaultDialer() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val roleManager = getSystemService(Context.ROLE_SERVICE) as RoleManager
+            val isHeld = roleManager.isRoleHeld(RoleManager.ROLE_DIALER)
+            if (!isHeld) {
+                val intent = roleManager.createRequestRoleIntent(RoleManager.ROLE_DIALER)
+                startActivityForResult(intent, REQUEST_ROLE)
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val telecomManager = getSystemService(Context.TELECOM_SERVICE) as TelecomManager
+            if (telecomManager.defaultDialerPackage != packageName) {
+                val intent = Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
+                intent.putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, packageName)
+                startActivityForResult(intent, REQUEST_TELECOM)
             }
         }
     }

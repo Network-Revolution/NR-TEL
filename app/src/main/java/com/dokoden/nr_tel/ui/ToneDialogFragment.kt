@@ -39,9 +39,9 @@ class ToneDialogFragment : DialogFragment() {
             false
         )
 
-        mainViewModel.callNumber.observe(requireParentFragment(), {
+        mainViewModel.callNumber.observe(requireParentFragment()) {
             binding.viewModel = mainViewModel
-        })
+        }
 
         return AlertDialog
             .Builder(requireActivity())

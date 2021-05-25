@@ -41,7 +41,7 @@ import com.dokoden.nr_tel.utility.Constants
 import com.google.android.material.tabs.TabLayout
 
 class MainFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val mainViewModel by viewModels<MainViewModel>()
         val accountViewModel by activityViewModels<AccountViewModel>()
         val binding = MainFragmentBinding.inflate(inflater, container, false)
@@ -54,7 +54,7 @@ class MainFragment : Fragment() {
 //        tabNavHostFragment.navController.graph = graph
 //        binding.tabLayout.getTabAt(1)?.select()
 
-        accountViewModel.allAccount.observe(viewLifecycleOwner, {
+        accountViewModel.allAccount.observe(viewLifecycleOwner) {
             binding.navView.menu.clear()
             binding.navView.menu
                 .add(0, Menu.FIRST, 0, R.string.menu_add_account)
@@ -87,7 +87,7 @@ class MainFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
 
         binding.also {
             it.viewModel = mainViewModel

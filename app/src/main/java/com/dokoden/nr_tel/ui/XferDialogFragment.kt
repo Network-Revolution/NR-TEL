@@ -47,9 +47,9 @@ class XferDialogFragment : DialogFragment() {
                     else -> Tab0Fragment()
                 }
             }
-            TabLayoutMediator(it.tabLayout, it.viewpager, { tab, position ->
+            TabLayoutMediator(it.tabLayout, it.viewpager) { tab, position ->
 
-            }).attach()
+            }.attach()
             return it.root
         }
     }

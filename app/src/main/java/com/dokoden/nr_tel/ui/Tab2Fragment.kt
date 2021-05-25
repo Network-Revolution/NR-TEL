@@ -31,7 +31,7 @@ import com.dokoden.nr_tel.service.EndlessService
 import com.dokoden.nr_tel.utility.Constants
 
 class Tab2Fragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val mainViewModel by viewModels<MainViewModel>()
         val recyclerAdapter = Tab2RecyclerAdapter(object : Tab2RecyclerAdapter.OnCardClickListener {
             override fun onCardClicked(contactBookDataClass: ContactBookDataClass) {
@@ -47,12 +47,12 @@ class Tab2Fragment : Fragment() {
 
         mainViewModel.loadContactBook()
 
-        mainViewModel.contactBook.observe(viewLifecycleOwner, {
+        mainViewModel.contactBook.observe(viewLifecycleOwner) {
             it?.also {
                 recyclerAdapter.dataList = it
                 recyclerAdapter.notifyDataSetChanged()
             }
-        })
+        }
 
         Tab2FragmentBinding.inflate(inflater, container, false).also {
             it.contactBookAdapter = recyclerAdapter

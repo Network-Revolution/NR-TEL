@@ -27,7 +27,7 @@ import com.dokoden.nr_tel.databinding.Tab3FragmentBinding
 import com.dokoden.nr_tel.model.MainViewModel
 
 class Tab3Fragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val mainViewModel by viewModels<MainViewModel>()
 
         Tab3FragmentBinding.inflate(inflater, container, false).also {

@@ -30,7 +30,7 @@ import com.dokoden.nr_tel.service.EndlessService
 import com.dokoden.nr_tel.utility.Constants
 
 class CallFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val mainHostFragment =
             requireParentFragment().parentFragmentManager.findFragmentById(R.id.main_navi_host) as NavHostFragment
 

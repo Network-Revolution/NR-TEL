@@ -54,7 +54,7 @@ class AccountSettingDialogFragment : DialogFragment() {
             .setNeutralButton(R.string.cancel) { _, _ ->
             }
 
-        accountViewModel.editAccount.observe(requireParentFragment(), {
+        accountViewModel.editAccount.observe(requireParentFragment()) {
             binding.viewModel = accountViewModel
             when {
                 it.orderNumber == 0 -> {
@@ -75,7 +75,7 @@ class AccountSettingDialogFragment : DialogFragment() {
                 else -> {
                 }
             }
-        })
+        }
         return builder.create()
     }
 }

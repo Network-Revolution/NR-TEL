@@ -27,7 +27,7 @@ import com.dokoden.nr_tel.databinding.CallIncomingBinding
 import com.dokoden.nr_tel.model.MainViewModel
 
 class CallIncomingFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val mainViewModel by viewModels<MainViewModel>()
 
         CallIncomingBinding.inflate(inflater, container, false).also {
