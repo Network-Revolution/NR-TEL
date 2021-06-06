@@ -17,6 +17,7 @@
 
 package com.dokoden.nr_tel.model
 
+import android.telecom.Call
 import androidx.lifecycle.MutableLiveData
 import com.dokoden.nr_tel.libsip.SipAccount
 
@@ -25,6 +26,7 @@ class TempRepository {
         val status = MutableLiveData("")
         val isOncall = MutableLiveData(false)
 
+        val callName = MutableLiveData("")
         val callNumber = MutableLiveData("")
         val callStatus = MutableLiveData("")
 
@@ -32,5 +34,8 @@ class TempRepository {
         val contactBook = MutableLiveData<List<ContactBookDataClass>>()
 
         val sipAccountList = MutableLiveData<List<SipAccount>>()
+
+        val telephoneCall = MutableLiveData<Call>()
+        val isTelephone = MutableLiveData(true)
     }
 }

@@ -25,6 +25,7 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:keepScreenOn="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -45,7 +46,7 @@
                         android:layout_width="200dp"
                         android:layout_height="200dp"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/ic_person_black_200dp"
+                        app:srcCompat="@drawable/ic_person_black_200dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:ignore="MissingConstraints"/>
@@ -55,7 +56,7 @@
                         android:layout_width="200dp"
                         android:layout_height="200dp"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/avatar_bg"
+                        app:srcCompat="@drawable/avatar_bg"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:ignore="MissingConstraints"/>
@@ -65,7 +66,7 @@
                         android:layout_width="200dp"
                         android:layout_height="200dp"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/avatar_border"
+                        app:srcCompat="@drawable/avatar_border"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:ignore="MissingConstraints"/>
@@ -77,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/incall_peer_uri"
+                    android:text="@={viewModel.callName}"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             <TextView
@@ -85,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/incall_call_state"/>
+                    android:text="@={viewModel.callStatus}"/>
         </LinearLayout>
 
         <com.google.android.material.bottomappbar.BottomAppBar
@@ -99,30 +100,28 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/answerFab"
+                android:id="@+id/answer_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{(view) -> viewModel.onCallAction(view)}"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_gravity="bottom|end"
                 app:fabCustomSize="@dimen/fab_center_size"
                 app:maxImageSize="@dimen/fab_center_icon_size"
                 app:srcCompat="@drawable/ic_call_black_24dp"
                 app:backgroundTint="@color/colorAnswerBackground"
-                app:tint="@android:color/white"
-                android:layout_margin="@dimen/fab_margin"
-                android:layout_gravity="bottom|right"/>
+                app:tint="@android:color/white"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/rejectFab"
+                android:id="@+id/reject_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{(view) -> viewModel.onCallAction(view)}"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_gravity="bottom|start"
                 app:fabCustomSize="@dimen/fab_center_size"
                 app:maxImageSize="@dimen/fab_center_icon_size"
                 app:srcCompat="@drawable/ic_call_end_black_24dp"
                 app:backgroundTint="@color/colorDeclineBackground"
-                app:tint="@android:color/white"
-                android:layout_margin="@dimen/fab_margin"
-                android:layout_gravity="bottom|left"/>
+                app:tint="@android:color/white"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

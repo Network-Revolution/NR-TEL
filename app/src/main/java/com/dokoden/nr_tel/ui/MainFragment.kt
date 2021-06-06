@@ -150,10 +150,12 @@ class MainFragment : Fragment() {
             it.fab.setOnClickListener { view ->
                 when (tabNavHostFragment.navController.currentDestination?.id) {
                     R.id.tab0Fragment -> {
+                        if (mainViewModel.callNumber.value.isNullOrEmpty()) return@setOnClickListener
                         Intent(view.context, EndlessService::class.java).also { intent ->
-                            intent.action = Constants.Actions.CallOutgoing.name
+                            intent.action = Constants.Actions.OutgoingCall.name
                             view.context.startService(intent)
                         }
+                        mainHostFragment.navController.navigate(R.id.callFragment, null)
                     }
                     R.id.tab1Fragment -> {
                         view.context.contentResolver.delete(CallLog.Calls.CONTENT_URI, null, null)

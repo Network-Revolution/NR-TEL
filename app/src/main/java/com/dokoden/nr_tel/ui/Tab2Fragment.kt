@@ -38,7 +38,7 @@ class Tab2Fragment : Fragment() {
                 mainViewModel.callNumber.postValue(contactBookDataClass.number)
                 Intent(activity, EndlessService::class.java).also {
                     it.action = if (mainViewModel.isOncall.value!!)
-                        Constants.Actions.CallXfer.name else Constants.Actions.CallOutgoing.name
+                        Constants.Actions.TransferCall.name else Constants.Actions.OutgoingCall.name
 
                     container!!.context.startService(it)
                 }

@@ -38,7 +38,7 @@ class CallFragment : Fragment() {
             it.lifecycleOwner = viewLifecycleOwner
             it.fab.setOnClickListener {
                 Intent(activity, EndlessService::class.java).also { intent ->
-                    intent.action = Constants.Actions.CallReject.name
+                    intent.action = Constants.Actions.DeclineIncomingCall.name
                     activity?.startService(intent)
                 }
             }

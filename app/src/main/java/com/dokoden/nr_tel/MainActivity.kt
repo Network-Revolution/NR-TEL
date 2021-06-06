@@ -117,11 +117,24 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
             "android.intent.action.MAIN" -> {
                 return
             }
-            Constants.Actions.CallIncoming.name -> navController.navigate(R.id.callIncommingFragment, null)
-            Constants.Actions.CallAnswer.name -> navController.navigate(R.id.callFragment, null)
-            Constants.Actions.CallReject.name -> navController.navigate(R.id.mainFragment, null)
-            Constants.Actions.CallOutgoing.name -> navController.navigate(R.id.callFragment, null)
-            Constants.Actions.CallXfer.name -> navController.navigate(R.id.callFragment, null)
+            Constants.Actions.TelephoneNew.name -> navController.navigate(R.id.callIncommingFragment)
+            Constants.Actions.TelephoneDialing.name -> navController.navigate(R.id.callIncommingFragment)
+            Constants.Actions.TelephoneRinging.name -> navController.navigate(R.id.callIncommingFragment)
+            Constants.Actions.TelephoneHolding.name -> navController.navigate(R.id.callIncommingFragment)
+            Constants.Actions.TelephoneActive.name -> navController.navigate(R.id.callFragment)
+            Constants.Actions.TelephoneDisconnected.name -> navController.navigate(R.id.mainFragment)
+            Constants.Actions.TelephoneSelectPhoneAccount.name -> navController.navigate(R.id.callIncommingFragment)
+            Constants.Actions.TelephoneConnecting.name -> navController.navigate(R.id.callIncommingFragment)
+            Constants.Actions.TelephoneDisconnecting.name -> navController.navigate(R.id.callIncommingFragment)
+            Constants.Actions.TelephonePullingCall.name -> navController.navigate(R.id.callFragment)
+            Constants.Actions.TelephoneAudioProcessing.name -> navController.navigate(R.id.callIncommingFragment)
+            Constants.Actions.TelephoneSimulatedRinging.name -> navController.navigate(R.id.callIncommingFragment)
+            Constants.Actions.DeclineIncomingCall.name -> navController.navigate(R.id.mainFragment)
+
+            Constants.Actions.IncomingCallScreen.name -> navController.navigate(R.id.callIncommingFragment, null)
+            Constants.Actions.AcceptIncomingCall.name -> navController.navigate(R.id.callFragment, null)
+            Constants.Actions.DeclineIncomingCall.name -> navController.navigate(R.id.mainFragment, null)
+            Constants.Actions.Kill.name -> navController.navigate(R.id.mainFragment, null)
             else -> {
 
             }

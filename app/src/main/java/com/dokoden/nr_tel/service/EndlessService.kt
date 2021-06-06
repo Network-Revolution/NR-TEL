@@ -33,12 +33,14 @@ import android.net.wifi.WifiManager
 import android.os.*
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.ViewModelProvider
 import com.dokoden.nr_tel.MainActivity
 import com.dokoden.nr_tel.R
 import com.dokoden.nr_tel.libsip.SipStackViewModel
 import com.dokoden.nr_tel.model.MainViewModel
+import com.dokoden.nr_tel.model.TelephoneViewModel
 import com.dokoden.nr_tel.utility.Constants
 import java.util.*
 
@@ -49,6 +51,10 @@ class EndlessService : LifecycleService() {
 
     private val sipStack by lazy {
         ViewModelProvider.AndroidViewModelFactory(application).create(SipStackViewModel::class.java)
+    }
+
+    private val telephone by lazy {
+        ViewModelProvider.AndroidViewModelFactory(application).create(TelephoneViewModel::class.java)
     }
 
     private var ringToneTimer: Timer? = null
@@ -118,8 +124,8 @@ class EndlessService : LifecycleService() {
 
         sipStack.status.observe(this, {
             when (sipStack.status.value) {
-                Constants.Actions.CallIncoming.name -> incomingCall()
-                Constants.Actions.CallReject.name -> callReject()
+                Constants.Actions.IncomingCallState.name -> incomingCall()
+                Constants.Actions.DeclineIncomingCall.name -> callReject()
             }
         })
 
@@ -144,10 +150,10 @@ class EndlessService : LifecycleService() {
             Constants.Actions.Stop.name -> stopService()
             Constants.Actions.StopForce.name -> stopService()
             Constants.Actions.Kill.name -> onDestroy()
-            Constants.Actions.CallAnswer.name -> callAnswer()
-            Constants.Actions.CallReject.name -> callReject()
-            Constants.Actions.CallOutgoing.name -> callOutgoing()
-            Constants.Actions.CallXfer.name -> callXfer()
+            Constants.Actions.AcceptIncomingCall.name -> callAnswer()
+            Constants.Actions.DeclineIncomingCall.name -> callReject()
+            Constants.Actions.OutgoingCall.name -> callOutgoing()
+            Constants.Actions.TransferCall.name -> callXfer()
         }
         return START_STICKY
     }
@@ -217,7 +223,7 @@ class EndlessService : LifecycleService() {
         }
 
         val pendingIntent = Intent(this, MainActivity::class.java).let {
-            it.action = Constants.Actions.CallIncoming.name
+            it.action = Constants.Actions.IncomingCallState.name
             it.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
 //            it.putExtra(R.id.callerName, callerId)
 //            it.putExtra(R.id.callerStateus, callerStatus)
@@ -225,12 +231,12 @@ class EndlessService : LifecycleService() {
         }
 
         val answerPendingIntent = Intent(this, EndlessService::class.java).let {
-            it.action = Constants.Actions.CallAnswer.name
+            it.action = Constants.Actions.AcceptIncomingCall.name
             PendingIntent.getService(this, Constants.RequestCode.Call.ordinal, it, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
         val rejectPendingIntent = Intent(this, EndlessService::class.java).let {
-            it.action = Constants.Actions.CallReject.name
+            it.action = Constants.Actions.DeclineIncomingCall.name
             PendingIntent.getService(this, Constants.RequestCode.Call.ordinal, it, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
@@ -291,34 +297,48 @@ class EndlessService : LifecycleService() {
     private fun callAnswer() {
         notifyManager.cancel(Constants.CallNotifyID)
         stopRinging()
-        sipStack.callAnswer()
-        Intent(this, MainActivity::class.java).also {
-            it.action = Constants.Actions.CallAnswer.name
-            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(it)
+        if (telephone.isTel.value == true) {
+            telephone.answer()
+        } else {
+            sipStack.callAnswer()
+            Intent(this, MainActivity::class.java).also {
+                it.action = Constants.Actions.AcceptIncomingCall.name
+                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(it)
+            }
         }
     }
 
     private fun callReject() {
         notifyManager.cancel(Constants.CallNotifyID)
         stopRinging()
-        sipStack.callReject()
-        Intent(this, MainActivity::class.java).also {
-            it.action = Constants.Actions.CallReject.name
-            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(it)
+        if (telephone.isTel.value == true) {
+            telephone.hangup()
+        } else {
+            sipStack.callReject()
+            Intent(this, MainActivity::class.java).also {
+                it.action = Constants.Actions.DeclineIncomingCall.name
+                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(it)
+            }
         }
     }
 
     private fun callOutgoing() {
         val outgoingNumber = viewModel.callNumber.value ?: return
-        sipStack.callOutgoing(outgoingNumber)
-        Intent(this, MainActivity::class.java).also {
-            it.action = Constants.Actions.CallOutgoing.name
-            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(it)
+        if (telephone.isTel.value == true) {
+            Intent(Intent.ACTION_CALL, "tel:${outgoingNumber}".toUri()).also {
+                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(it)
+            }
+        } else {
+            sipStack.callOutgoing(outgoingNumber)
+            Intent(this, MainActivity::class.java).also {
+                it.action = Constants.Actions.OutgoingCall.name
+                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(it)
+            }
         }
-
         viewModel.callNumber.postValue("")
     }
 
@@ -326,7 +346,7 @@ class EndlessService : LifecycleService() {
         val outgoingNumber = viewModel.callNumber.value ?: return
         sipStack.callTransfer(outgoingNumber)
         Intent(this, MainActivity::class.java).also {
-            it.action = Constants.Actions.CallOutgoing.name
+            it.action = Constants.Actions.OutgoingCall.name
             it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(it)
         }
@@ -358,9 +378,7 @@ class EndlessService : LifecycleService() {
             val audioAttrs = AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
                 .build()
-            vibrator.vibrate(effect, audioAttrs)
-        } else {
-            vibrator.vibrate(timings, 1)
+//            vibrator.vibrate(effect, audioAttrs)
         }
     }
 
@@ -373,6 +391,6 @@ class EndlessService : LifecycleService() {
                 ringToneTimer = null
             }
         }
-        vibrator.cancel()
+//        vibrator.cancel()
     }
 }

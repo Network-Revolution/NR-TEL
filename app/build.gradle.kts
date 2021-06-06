@@ -217,10 +217,10 @@ android {
 
     defaultConfig {
         applicationId = "com.dokoden.nr_tel"
-        minSdk = 24
+        minSdk = 27
         targetSdk = 30
-        versionCode = 20
-        versionName = "0.9.20210515"
+        versionCode = 21
+        versionName = "0.9.20210605"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         javaCompileOptions {
@@ -272,7 +272,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     // Material Design and Preferences
     implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.recyclerview:recyclerview:1.2.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.security:security-crypto:1.0.0")
     // Layout

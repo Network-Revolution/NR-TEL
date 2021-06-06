@@ -19,7 +19,6 @@ package com.dokoden.nr_tel.model
 
 import android.Manifest
 import android.app.Application
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.icu.text.SimpleDateFormat
 import android.media.AudioManager
@@ -30,8 +29,6 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import com.dokoden.nr_tel.R
-import com.dokoden.nr_tel.service.EndlessService
-import com.dokoden.nr_tel.utility.Constants
 import java.util.*
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -41,7 +38,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = AccountRepository(accountDao)
     val enabledAccount = repository.enabledAccount
     val outgoingAccount = repository.outgoingAccount
+    val callName = TempRepository.callName
     val callNumber = TempRepository.callNumber
+    val callStatus = TempRepository.callStatus
     val callLog = TempRepository.callLog
     val contactBook = TempRepository.contactBook
     val isOncall = TempRepository.isOncall
@@ -193,13 +192,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun onCallAction(view: View) {
-        Intent(view.context, EndlessService::class.java).also {
-            it.action = when (view.id) {
-                R.id.answerFab -> Constants.Actions.CallAnswer.name
-                R.id.rejectFab -> Constants.Actions.CallReject.name
-                else -> return
-            }
-            view.context.startService(it)
-        }
+//        Intent(view.context, EndlessService::class.java).also {
+//            it.action = when (view.id) {
+//                R.id.answerFab -> Constants.Actions.CallAnswer.name
+//                R.id.rejectFab -> Constants.Actions.CallReject.name
+//                else -> return
+//            }
+//            view.context.startService(it)
+//        }
     }
 }
