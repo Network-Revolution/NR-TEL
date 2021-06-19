@@ -17,6 +17,7 @@
 
 package com.dokoden.nr_tel
 
+import android.Manifest
 import android.app.Activity
 import android.app.role.RoleManager
 import android.content.Context
@@ -24,8 +25,9 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.telecom.TelecomManager
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.PermissionChecker
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.preference.Preference
@@ -33,14 +35,9 @@ import androidx.preference.PreferenceFragmentCompat
 import com.dokoden.nr_tel.databinding.MainActivityBinding
 import com.dokoden.nr_tel.service.EndlessService
 import com.dokoden.nr_tel.utility.Constants
-import net.taptappun.taku.kobayashi.runtimepermissionchecker.RuntimePermissionChecker
 
 class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
     private lateinit var binding: MainActivityBinding
-    private val REQUEST_PERMISSION = 100
-    private val REQUEST_ROLE = 200
-    private val REQUEST_TELECOM = 300
-
     private val navController by lazy { findNavController(R.id.main_navi_host) }
     private val endlessService by lazy { Intent(this, EndlessService::class.java) }
 
@@ -49,7 +46,6 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
 
         //パーミッションの許可
         offerReplacingDefaultDialer()
-        RuntimePermissionChecker.requestAllPermissions(this, Constants.RequestCode.Permission.ordinal)
 
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
         onNewIntent(intent)
@@ -61,43 +57,6 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
                 } else {
                     startService(it)
                 }
-            }
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_PERMISSION && PermissionChecker.PERMISSION_GRANTED in grantResults) {
-
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            REQUEST_ROLE -> when (resultCode) {
-                Activity.RESULT_CANCELED -> {
-                    //the user didn't set you as the default screening app...
-                }
-                Activity.RESULT_OK -> {
-                    //The user set you as the default screening app!
-                }
-                Activity.RESULT_FIRST_USER -> {
-
-                }
-            }
-            REQUEST_TELECOM -> when (resultCode) {
-                Activity.RESULT_CANCELED -> {
-                    //the user didn't set you as the default screening app...
-                }
-                Activity.RESULT_OK -> {
-                    //The user set you as the default screening app!
-                }
-                Activity.RESULT_FIRST_USER -> {
-
-                }
-            }
-            else -> {
             }
         }
     }
@@ -147,15 +106,49 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
             val isHeld = roleManager.isRoleHeld(RoleManager.ROLE_DIALER)
             if (!isHeld) {
                 val intent = roleManager.createRequestRoleIntent(RoleManager.ROLE_DIALER)
-                startActivityForResult(intent, REQUEST_ROLE)
+                requestPermissions(intent)
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val telecomManager = getSystemService(Context.TELECOM_SERVICE) as TelecomManager
             if (telecomManager.defaultDialerPackage != packageName) {
                 val intent = Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
                 intent.putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, packageName)
-                startActivityForResult(intent, REQUEST_TELECOM)
+                requestPermissions(intent)
             }
         }
+    }
+
+    private fun requestPermissions(intent: Intent) {
+        val requestMultiplePermissions =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+                permissions.entries.forEach {
+                    Toast.makeText(this, "${it.key} = ${it.value}", Toast.LENGTH_LONG).show()
+                }
+            }
+        val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            when (it.resultCode) {
+                Activity.RESULT_OK -> {
+
+                }
+                Activity.RESULT_CANCELED -> {
+                    requestMultiplePermissions.launch(
+                        arrayOf(
+                            Manifest.permission.ACCESS_NETWORK_STATE,
+                            Manifest.permission.CALL_PHONE,
+                            Manifest.permission.SYSTEM_ALERT_WINDOW,
+                            Manifest.permission.WAKE_LOCK,
+                            Manifest.permission.READ_CALL_LOG,
+                            Manifest.permission.WRITE_CALL_LOG,
+                            Manifest.permission.READ_CONTACTS,
+                            Manifest.permission.WRITE_CONTACTS,
+                        )
+                    )
+                }
+                Activity.RESULT_FIRST_USER -> {
+
+                }
+            }
+        }
+        startForResult.launch(intent)
     }
 }

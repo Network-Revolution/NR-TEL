@@ -219,8 +219,8 @@ android {
         applicationId = "com.dokoden.nr_tel"
         minSdk = 27
         targetSdk = 30
-        versionCode = 21
-        versionName = "0.9.20210605"
+        versionCode = 24
+        versionName = "0.9.20210618"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         javaCompileOptions {
@@ -310,5 +310,4 @@ dependencies {
     // 3rd Party(mavenCentral)
     implementation("org.apache.commons:commons-lang3:3.12.0")
     implementation("xyz.gianlu.mdnsjava:mdnsjava:2.2.1")
-    implementation("net.taptappun.taku.kobayashi:runtimepermissionchecker:1.1.1")
 }
