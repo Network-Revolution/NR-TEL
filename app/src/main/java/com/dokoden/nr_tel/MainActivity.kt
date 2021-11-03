@@ -19,12 +19,14 @@ package com.dokoden.nr_tel
 
 import android.Manifest
 import android.app.Activity
+import android.app.KeyguardManager
 import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.telecom.TelecomManager
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +37,7 @@ import androidx.preference.PreferenceFragmentCompat
 import com.dokoden.nr_tel.databinding.MainActivityBinding
 import com.dokoden.nr_tel.service.EndlessService
 import com.dokoden.nr_tel.utility.Constants
+import java.net.URLDecoder
 
 class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
     private lateinit var binding: MainActivityBinding
@@ -46,17 +49,14 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
 
         //パーミッションの許可
         offerReplacingDefaultDialer()
-
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
         onNewIntent(intent)
-        if (!EndlessService.isServiceRunning) {
-            endlessService.let {
-                it.action = Constants.Actions.Start.name
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    startForegroundService(it)
-                } else {
-                    startService(it)
-                }
+        endlessService.let {
+            it.action = Constants.IntentActions.Start.name
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(it)
+            } else {
+                startService(it)
             }
         }
     }
@@ -73,30 +73,33 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
         super.onNewIntent(intent)
         val action = intent?.action ?: return
         when (action) {
-            "android.intent.action.MAIN" -> {
-                return
-            }
-            Constants.Actions.TelephoneNew.name -> navController.navigate(R.id.callIncommingFragment)
-            Constants.Actions.TelephoneDialing.name -> navController.navigate(R.id.callIncommingFragment)
-            Constants.Actions.TelephoneRinging.name -> navController.navigate(R.id.callIncommingFragment)
-            Constants.Actions.TelephoneHolding.name -> navController.navigate(R.id.callIncommingFragment)
-            Constants.Actions.TelephoneActive.name -> navController.navigate(R.id.callFragment)
-            Constants.Actions.TelephoneDisconnected.name -> navController.navigate(R.id.mainFragment)
-            Constants.Actions.TelephoneSelectPhoneAccount.name -> navController.navigate(R.id.callIncommingFragment)
-            Constants.Actions.TelephoneConnecting.name -> navController.navigate(R.id.callIncommingFragment)
-            Constants.Actions.TelephoneDisconnecting.name -> navController.navigate(R.id.callIncommingFragment)
-            Constants.Actions.TelephonePullingCall.name -> navController.navigate(R.id.callFragment)
-            Constants.Actions.TelephoneAudioProcessing.name -> navController.navigate(R.id.callIncommingFragment)
-            Constants.Actions.TelephoneSimulatedRinging.name -> navController.navigate(R.id.callIncommingFragment)
-            Constants.Actions.DeclineIncomingCall.name -> navController.navigate(R.id.mainFragment)
+            "android.intent.action.MAIN" -> return
+            Intent.ACTION_CALL -> {
+                val uri = intent.data
+                if (uri != null) {
+                    val uriStr = URLDecoder.decode(uri.toString(), "UTF-8")
+                    when (uri.scheme) {
+                        "sip" -> {
 
-            Constants.Actions.IncomingCallScreen.name -> navController.navigate(R.id.callIncommingFragment, null)
-            Constants.Actions.AcceptIncomingCall.name -> navController.navigate(R.id.callFragment, null)
-            Constants.Actions.DeclineIncomingCall.name -> navController.navigate(R.id.mainFragment, null)
-            Constants.Actions.Kill.name -> navController.navigate(R.id.mainFragment, null)
-            else -> {
+                        }
+                        "tel" -> {
 
+                        }
+                        else -> {
+
+                            return
+                        }
+                    }
+                }
             }
+            Constants.IntentActions.OutgoingCall.name -> navController.navigate(R.id.callFragment)
+            Constants.IntentActions.OnIncomingCall.name -> {
+                allowOnLockScreen()
+                navController.navigate(R.id.callIncommingFragment)
+            }
+            Constants.IntentActions.AcceptIncomingCall.name -> navController.navigate(R.id.callFragment)
+            Constants.IntentActions.DeclineIncomingCall.name -> navController.navigate(R.id.mainFragment)
+            Constants.IntentActions.Kill.name -> navController.navigate(R.id.mainFragment)
         }
     }
 
@@ -150,5 +153,21 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
             }
         }
         startForResult.launch(intent)
+    }
+
+    fun allowOnLockScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+            val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+            keyguardManager.requestDismissKeyguard(this, null)
+        } else {
+            window.addFlags(
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                        WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
+            )
+        }
     }
 }

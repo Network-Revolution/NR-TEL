@@ -211,16 +211,16 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = 31
     buildToolsVersion = "30.0.3"
-    ndkVersion = "22.1.7171670"
+    ndkVersion = "23.1.7779620"
 
     defaultConfig {
         applicationId = "com.dokoden.nr_tel"
-        minSdk = 27
+        minSdk = 24
         targetSdk = 30
-        versionCode = 24
-        versionName = "0.9.20210618"
+        versionCode = 32
+        versionName = "1.0.20211103"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         javaCompileOptions {
@@ -235,7 +235,8 @@ android {
     }
     buildFeatures {
         dataBinding = true
-        // viewBinding = true
+//        viewBinding = true
+//        compose = true
     }
     buildTypes {
         getByName("release") {
@@ -254,6 +255,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+//    composeOptions {
+//        kotlinCompilerExtensionVersion = "1.0.1"
+//    }
 }
 
 dependencies {
@@ -261,22 +265,22 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar"))))
     // Test
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     // Core
-    implementation("androidx.core:core-ktx:1.5.0")
-    implementation("androidx.appcompat:appcompat:1.3.0")
-//    implementation("com.google.android.gms:play-services-instantapps:17.0.0")
+    implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+//    implementation("com.google.android.gms:play-services-instantapps:17.0.1")
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     // Material Design and Preferences
-    implementation("com.google.android.material:material:1.3.0")
+    implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.security:security-crypto:1.0.0")
     // Layout
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.1.0")
     implementation("androidx.drawerlayout:drawerlayout:1.1.1")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
@@ -286,28 +290,27 @@ dependencies {
     // Futures
     implementation("androidx.concurrent:concurrent-futures-ktx:1.1.0")
     // ViewModel and LiveData
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-service:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-service:2.4.0")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
     // Room
     implementation("androidx.room:room-runtime:2.3.0")
     kapt("androidx.room:room-compiler:2.3.0")
     testImplementation("androidx.room:room-testing:2.3.0")
     // Paging
-    implementation("androidx.paging:paging-runtime-ktx:3.0.0")
-    testImplementation("androidx.paging:paging-common-ktx:3.0.0")
+    implementation("androidx.paging:paging-runtime-ktx:3.0.1")
+    testImplementation("androidx.paging:paging-common-ktx:3.0.1")
     // WorkManager
-    implementation("androidx.work:work-runtime-ktx:2.5.0")
-    androidTestImplementation("androidx.work:work-testing:2.5.0")
+    implementation("androidx.work:work-runtime-ktx:2.7.0")
+    androidTestImplementation("androidx.work:work-testing:2.7.0")
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
     // kotlinx.serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
     // 3rd Party(mavenCentral)
-    implementation("org.apache.commons:commons-lang3:3.12.0")
     implementation("xyz.gianlu.mdnsjava:mdnsjava:2.2.1")
 }
